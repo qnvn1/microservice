@@ -1,10 +1,3 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Response;
-use App\Traits\ApiResponser;
-use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 
