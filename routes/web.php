@@ -1,4 +1,3 @@
-
 <?php
 
 /** @var \Laravel\Lumen\Routing\Router $router */
@@ -30,3 +29,7 @@ $router->get('/users/{id}', 'UserController@show'); // Get a user by ID
 $router->put('/users/{id}', 'UserController@update'); // Update a user record (full update)
 $router->patch('/users/{id}', 'UserController@update'); // Update a user record (partial update)
 $router->delete('/users/{id}', 'UserController@delete'); // Delete a user record
+
+// UserJob Routes
+$router->get('/usersjob', 'UserJobController@index'); // Get all user jobs
+$router->get('/userjob/{id}', 'UserJobController@show'); // Get user job by ID
