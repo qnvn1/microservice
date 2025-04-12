@@ -22,14 +22,16 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('/users', ['uses' => 'UserController@getUsers']);
 });
 
-// More routes for users
-$router->get('/users', 'UserController@index'); // Get all user records
-$router->post('/users', 'UserController@add'); // Create a new user record
-$router->get('/users/{id}', 'UserController@show'); // Get a user by ID
-$router->put('/users/{id}', 'UserController@update'); // Update a user record (full update)
-$router->patch('/users/{id}', 'UserController@update'); // Update a user record (partial update)
-$router->delete('/users/{id}', 'UserController@delete'); // Delete a user record
+// Public routes
+$router->get('/users', 'UserController@index');
+$router->get('/users/{id}', 'UserController@show');
+$router->get('/usersjob', 'UserJobController@index');
+$router->get('/userjob/{id}', 'UserJobController@show');
 
-// UserJob Routes
-$router->get('/usersjob', 'UserJobController@index'); // Get all user jobs
-$router->get('/userjob/{id}', 'UserJobController@show'); // Get user job by ID
+// Secure routes (with middleware)
+$router->group(['middleware' => 'auth.access'], function () use ($router) {
+    $router->post('/users', 'UserController@add');
+    $router->put('/users/{id}', 'UserController@update');
+    $router->patch('/users/{id}', 'UserController@update');
+    $router->delete('/users/{id}', 'UserController@delete');
+});
